@@ -171,23 +171,21 @@ function setMarkers(location) {
 		console.log(markersArray);
 
 		marker.setMap(map);
-		marker.addListener('click', function(marker){
-			infoWindow(this,infowindow);	
-		});		
+		marker.addListener('click',infoWindow);		
 
 		var searchNav = $('#nav' + i);
 		console.log(searchNav);
-        searchNav.click(function(marker){searchNavv(this, i, infowindow ,location)});
+        searchNav.click(searchNavv);
 		
     }
 	
 	
 	
-	function searchNavv(divContent, i, infowindow, location){
-		console.log(divContent);
-		console.log(divContent.id);
+	function searchNavv(){
+		console.log(this);
+		console.log(this.id);
 		console.log("Yenna Panrathu");
-		var str = divContent.id;
+		var str = this.id;
 		console.log(str.substring(3,4));
 		var id = str.substring(3,4);
 		console.log(location[id]);
@@ -213,10 +211,7 @@ function setMarkers(location) {
           }
         });
 		marker.setMap(map);
-		marker.addListener('click', function(){
-			infoWindow(this,infowindow);
-			console.log("Working");
-		});
+		marker.addListener('click',infoWindow);
 		var contentString= '<img src="' + location[id].img + 
                                     '" alt="Street View Image of ' + location[id].title + '" class="img-pop" /><br><hr style="margin-bottom: 5px"><strong>' + 
                                     location[id].title + '</strong><br><p>' + 
@@ -232,7 +227,8 @@ function setMarkers(location) {
 		});		
 	}
 	
-	function infoWindow(marker,infowindow){
+	function infoWindow(){
+		marker = this ;
 		if(infowindow.marker !=marker){
 			infowindow.marker=marker;
 			var contentString= '<img src="' + marker.img + 
